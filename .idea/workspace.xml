@@ -15,7 +15,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41fc4ec4-bbfc-4506-8d6b-c13389ecaa8b" name="Default" comment="" />
+    <list default="true" id="41fc4ec4-bbfc-4506-8d6b-c13389ecaa8b" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/symbol/barcodesample1/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/symbol/barcodesample1/MainActivity.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,8 +60,23 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/symbol/barcodesample1/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="773" column="9" selection-start-line="773" selection-start-column="9" selection-end-line="773" selection-end-column="9" />
+            <state relative-caret-position="227">
+              <caret line="92" column="34" lean-forward="true" selection-start-line="92" selection-start-column="34" selection-end-line="92" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#23672#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#13483#13628#0" expanded="true" />
+                <element signature="e#13627#13628#0" expanded="true" />
+                <element signature="e#13798#13939#0" expanded="true" />
+                <element signature="e#13938#13939#0" expanded="true" />
+                <element signature="e#14045#14393#0" expanded="true" />
+                <element signature="e#14392#14393#0" expanded="true" />
+                <element signature="e#14545#14553#0" expanded="true" />
+                <element signature="e#15402#15410#0" expanded="true" />
+                <element signature="e#15767#15775#0" expanded="true" />
+                <element signature="e#21141#21372#0" expanded="true" />
+                <element signature="e#21371#21372#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,6 +96,9 @@
       <dir>$PROJECT_DIR$</dir>
       <dir>$PROJECT_DIR$/app</dir>
     </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
@@ -2341,8 +2361,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/symbol/barcodesample1/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/symbol/barcodesample1/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -2352,6 +2372,7 @@
     <option name="width" value="1398" />
     <option name="height" value="1024" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -2362,6 +2383,21 @@
       <pane id="AndroidView">
         <subPane>
           <expand>
+            <path>
+              <item name="BarcodeSample1" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="BarcodeSample1" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="BarcodeSample1" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
             <path>
               <item name="BarcodeSample1" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
@@ -2516,9 +2552,9 @@
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Logcat" order="7" visible="true" weight="0.31937173" />
+      <window_info anchor="bottom" id="Logcat" order="7" visible="true" weight="0.32004198" />
       <window_info id="Captures" order="2" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
@@ -2562,6 +2598,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11385">
           <caret line="759" column="31" selection-start-line="759" selection-start-column="31" selection-end-line="759" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#23672#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#13483#13628#0" expanded="true" />
+            <element signature="e#13627#13628#0" expanded="true" />
+            <element signature="e#13798#13939#0" expanded="true" />
+            <element signature="e#13938#13939#0" expanded="true" />
+            <element signature="e#14045#14393#0" expanded="true" />
+            <element signature="e#14392#14393#0" expanded="true" />
+            <element signature="e#14545#14553#0" expanded="true" />
+            <element signature="e#15402#15410#0" expanded="true" />
+            <element signature="e#15767#15775#0" expanded="true" />
+            <element signature="e#21141#21372#0" expanded="true" />
+            <element signature="e#21371#21372#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2583,6 +2634,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11340">
           <caret line="759" column="31" lean-forward="true" selection-start-line="759" selection-start-column="31" selection-end-line="759" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#23672#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#13483#13628#0" expanded="true" />
+            <element signature="e#13627#13628#0" expanded="true" />
+            <element signature="e#13798#13939#0" expanded="true" />
+            <element signature="e#13938#13939#0" expanded="true" />
+            <element signature="e#14045#14393#0" expanded="true" />
+            <element signature="e#14392#14393#0" expanded="true" />
+            <element signature="e#14545#14553#0" expanded="true" />
+            <element signature="e#15402#15410#0" expanded="true" />
+            <element signature="e#15767#15775#0" expanded="true" />
+            <element signature="e#21141#21372#0" expanded="true" />
+            <element signature="e#21371#21372#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2639,8 +2705,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="148" column="11" lean-forward="true" selection-start-line="148" selection-start-column="11" selection-end-line="148" selection-end-column="11" />
+        <state relative-caret-position="2220">
+          <caret line="148" column="11" selection-start-line="148" selection-start-column="11" selection-end-line="148" selection-end-column="11" />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer2">
@@ -2649,8 +2715,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/symbol/barcodesample1/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="773" column="9" selection-start-line="773" selection-start-column="9" selection-end-line="773" selection-end-column="9" />
+        <state relative-caret-position="227">
+          <caret line="92" column="34" lean-forward="true" selection-start-line="92" selection-start-column="34" selection-end-line="92" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#23672#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#13483#13628#0" expanded="true" />
+            <element signature="e#13627#13628#0" expanded="true" />
+            <element signature="e#13798#13939#0" expanded="true" />
+            <element signature="e#13938#13939#0" expanded="true" />
+            <element signature="e#14045#14393#0" expanded="true" />
+            <element signature="e#14392#14393#0" expanded="true" />
+            <element signature="e#14545#14553#0" expanded="true" />
+            <element signature="e#15402#15410#0" expanded="true" />
+            <element signature="e#15767#15775#0" expanded="true" />
+            <element signature="e#21141#21372#0" expanded="true" />
+            <element signature="e#21371#21372#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView5"
         android:layout_alignLeft="@+id/textView2"
-        android:text="Continuo." />
+        android:text="Continuo" />
 
     <CheckBox
         android:id="@+id/checkBoxCode39"
