@@ -74,6 +74,7 @@
       <find>scannerIndex</find>
       <find>initscanner</find>
       <find>deviceList</find>
+      <find>continuo.</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
