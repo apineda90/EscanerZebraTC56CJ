@@ -1,0 +1,38 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/gromero/Documentos/samples-emdkforandroid-6_9/BarcodeSample1/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "/home/gromero/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/5e25166827f22f99eb952f6c32857952/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "/home/gromero/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/8dd3a059661a79fb13b21ad580441afd/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
+                    }
+                }
+            ]
+        }
+    ]
+}
