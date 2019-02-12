@@ -119,6 +119,7 @@ output.json
 *.ipr
 *~
 *.swp
+app/build/intermediates/
 
 # Android Patch
 
