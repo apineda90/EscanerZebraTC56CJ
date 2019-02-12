@@ -59,7 +59,7 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
     private BarcodeManager barcodeManager = null;
     private Scanner scanner = null;
 
-    private boolean bContinuousMode = false;
+    private boolean bContinuousMode = true;
 
     private TextView textViewData = null;
     private TextView textViewStatus = null;
@@ -70,18 +70,19 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
     private CheckBox checkBoxCode128 = null;
     private CheckBox checkBoxContinuous = null;
 
-    private Spinner spinnerScannerDevices = null;
-    private Spinner spinnerTriggers = null;
+    //private Spinner spinnerScannerDevices = null;
+    //private Spinner spinnerTriggers = null;
 
     private List<ScannerInfo> deviceList = null;
 
-    private int scannerIndex = 0; // Keep the selected scanner
-    private int defaultIndex = 0; // Keep the default scanner
-    private int triggerIndex = 0;
+    private int scannerIndex = 0;    // Keep the selected scanner
+    //private int defaultIndex = 0; // Keep the default scanner
+    //private int triggerIndex = 0;
     private int dataLength = 0;
     private String statusString = "";
 
-    private String [] triggerStrings = {"HARD", "SOFT"};
+    //private String [] triggerStrings = {"HARD", "SOFT"};
+    //private String [] triggerStrings = {"HARD"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,20 +93,24 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         setDefaultOrientation();
 
-        textViewData = (TextView)findViewById(R.id.textViewData);
-        textViewStatus = (TextView)findViewById(R.id.textViewStatus);
+        textViewData = (TextView)findViewById(R.id.textViewData);     // Aqui se guardan los datos leidos
+        textViewStatus = (TextView)findViewById(R.id.textViewStatus); // Aqui se guardan el estado del escaner
+
         checkBoxEAN8 = (CheckBox)findViewById(R.id.checkBoxEAN8);
         checkBoxEAN13 = (CheckBox)findViewById(R.id.checkBoxEAN13);
         checkBoxCode39 = (CheckBox)findViewById(R.id.checkBoxCode39);
         checkBoxCode128 = (CheckBox)findViewById(R.id.checkBoxCode128);
+
         checkBoxContinuous = (CheckBox)findViewById(R.id.checkBoxContinuous);
-        spinnerScannerDevices = (Spinner)findViewById(R.id.spinnerScannerDevices);
-        spinnerTriggers = (Spinner)findViewById(R.id.spinnerTriggers);
+
+        //spinnerScannerDevices = (Spinner)findViewById(R.id.spinnerScannerDevices);
+        //spinnerTriggers = (Spinner)findViewById(R.id.spinnerTriggers);
 
 		
 		EMDKResults results = EMDKManager.getEMDKManager(getApplicationContext(), this);
+
 		if (results.statusCode != EMDKResults.STATUS_CODE.SUCCESS) {
-			textViewStatus.setText("Status: " + "EMDKManager object request failed!");
+			textViewStatus.setText("Estado: " + "Fallo al solicitar Objeto EMDKManager!");
 			return;
 		}
 		
@@ -114,12 +119,13 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
         checkBoxCode39.setOnCheckedChangeListener(this);
         checkBoxCode128.setOnCheckedChangeListener(this);
 
-        addSpinnerScannerDevicesListener();
-        populateTriggers();
-        addSpinnerTriggersListener();
-        addStartScanButtonListener();
-        addStopScanButtonListener();
-        addCheckBoxListener();
+        //addSpinnerScannerDevicesListener();                            //Agrega listener
+        //populateTriggers();                                            // Llena triggers hard o soft
+        //addSpinnerTriggersListener();                                  // agrega listener al combo anterior
+
+        //addStartScanButtonListener();
+        //addStopScanButtonListener();
+        //addCheckBoxListener();
 
         textViewData.setSelected(true);
         textViewData.setMovementMethod(new ScrollingMovementMethod());
@@ -222,11 +228,11 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
             enumerateScannerDevices();
 
             // Set selected scanner
-            spinnerScannerDevices.setSelection(scannerIndex);
+            //spinnerScannerDevices.setSelection(scannerIndex);
 
             // Initialize scanner
             initScanner();
-            setTrigger();
+            setTrigger();  // Setea hard o soft
             setDecoders();
         }
     }
@@ -253,7 +259,7 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
     @Override
     public void onOpened(EMDKManager emdkManager) {
 
-        textViewStatus.setText("Status: " + "EMDK open success!");
+        textViewStatus.setText("Estado: " + "Apertura de EMDK exitosa!");
 
         this.emdkManager = emdkManager;
 
@@ -268,8 +274,9 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
         // Enumerate scanner devices
         enumerateScannerDevices();
 
+        startScan();
         // Set default scanner
-        spinnerScannerDevices.setSelection(defaultIndex);
+        //spinnerScannerDevices.setSelection(defaultIndex);
     }
 
     @Override
@@ -287,7 +294,7 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
             emdkManager.release();
             emdkManager = null;
         }
-        textViewStatus.setText("Status: " + "EMDK closed unexpectedly! Please close and restart the application.");
+        textViewStatus.setText("Estado: " + "EMDK se cerró inesperadamente! Por favor, cierre y reinicie la aplicación.");
     }
 
     @Override
@@ -310,7 +317,7 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
         ScannerStates state = statusData.getState();
         switch(state) {
             case IDLE:
-                statusString = statusData.getFriendlyName()+" is enabled and idle...";
+                statusString = statusData.getFriendlyName()+" está disponible y desocupado...";
                 new AsyncStatusUpdate().execute(statusString);
                 if (bContinuousMode) {
                     try {
@@ -332,22 +339,22 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
                 new AsyncUiControlUpdate().execute(true);
                 break;
             case WAITING:
-                statusString = "Scanner is waiting for trigger press...";
+                statusString = "El escaner está esperando.. ";
                 new AsyncStatusUpdate().execute(statusString);
                 new AsyncUiControlUpdate().execute(false);
                 break;
             case SCANNING:
-                statusString = "Scanning...";
+                statusString = "Escaneando...";
                 new AsyncStatusUpdate().execute(statusString);
                 new AsyncUiControlUpdate().execute(false);
                 break;
             case DISABLED:
-                statusString = statusData.getFriendlyName()+" is disabled.";
+                statusString = statusData.getFriendlyName()+" está inabilitado.";
                 new AsyncStatusUpdate().execute(statusString);
                 new AsyncUiControlUpdate().execute(true);
                 break;
             case ERROR:
-                statusString = "An error has occurred.";
+                statusString = "Ha ocurrido un error.";
                 new AsyncStatusUpdate().execute(statusString);
                 new AsyncUiControlUpdate().execute(true);
                 break;
@@ -356,6 +363,7 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
         }
     }
 
+    /*
     private void addSpinnerScannerDevicesListener() {
 
         spinnerScannerDevices.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -368,7 +376,7 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
                     scannerIndex = position;
                     deInitScanner();
                     initScanner();
-                    setTrigger();
+                    setTrigger();     // Setea hard o soft
                     setDecoders();
                 }
 
@@ -380,18 +388,20 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
             }
 
         });
-    }
+    }*/
 
+    /*
     private void addSpinnerTriggersListener() {
 
         spinnerTriggers.setOnItemSelectedListener(new OnItemSelectedListener() {
+
 
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int position, long arg3) {
 
                 triggerIndex = position;
-                setTrigger();
+                setTrigger();         // Setea hard o soft
 
             }
 
@@ -401,9 +411,12 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
             }
         });
     }
+    */
+
 
     private void addStartScanButtonListener() {
 
+        /*
         Button btnStartScan = (Button)findViewById(R.id.buttonStartScan);
 
         btnStartScan.setOnClickListener(new OnClickListener() {
@@ -414,11 +427,12 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
                 startScan();
             }
         });
+        */
     }
 
     private void addStopScanButtonListener() {
 
-        Button btnStopScan = (Button)findViewById(R.id.buttonStopScan);
+        /*Button btnStopScan = (Button)findViewById(R.id.buttonStopScan);
 
         btnStopScan.setOnClickListener(new OnClickListener() {
 
@@ -427,9 +441,10 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
 
                 stopScan();
             }
-        });
+        });*/
     }
 
+    /*
     private void addCheckBoxListener() {
 
         checkBoxContinuous.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -445,19 +460,22 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
             }
         });
     }
+    */
 
     private void enumerateScannerDevices() {
 
         if (barcodeManager != null) {
 
-            List<String> friendlyNameList = new ArrayList<String>();
-            int spinnerIndex = 0;
+            //List<String> friendlyNameList = new ArrayList<String>();
+            //int spinnerIndex = 0;
 
             deviceList = barcodeManager.getSupportedDevicesInfo();
 
+            /*
             if ((deviceList != null) && (deviceList.size() != 0)) {
 
                 Iterator<ScannerInfo> it = deviceList.iterator();
+
                 while(it.hasNext()) {
                     ScannerInfo scnInfo = it.next();
                     friendlyNameList.add(scnInfo.getFriendlyName());
@@ -470,38 +488,51 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
             else {
                 textViewStatus.setText("Status: " + "Failed to get the list of supported scanner devices! Please close and restart the application.");
             }
+            */
 
-            ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item, friendlyNameList);
-            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            if ((deviceList == null) || (deviceList.size() == 0)) {
+                //textViewStatus.setText("Status: " + "Failed to get the list of supported scanner devices! Please close and restart the application.");
+                textViewStatus.setText("Estado: " + "Fallo al obtener dispositivos de escáner soportados. Por favor, cierre y reinicie la aplicación.");
+            }
 
-            spinnerScannerDevices.setAdapter(spinnerAdapter);
+            //ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item, friendlyNameList);
+            //spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            //spinnerScannerDevices.setAdapter(spinnerAdapter);
         }
     }
 
-    private void populateTriggers() {
+    /*
+    private void populateTriggers() {  // Lena spinner con HARD, SOFT
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_item, triggerStrings);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerTriggers.setAdapter(spinnerAdapter);
         spinnerTriggers.setSelection(triggerIndex);
-    }
+    }*/
 
-    private void setTrigger() {
+    private void setTrigger() {  // Setea hard o soft
 
         if (scanner == null) {
             initScanner();
         }
 
+        /*
         if (scanner != null) {
             switch (triggerIndex) {
                 case 0: // Selected "HARD"
-                    scanner.triggerType = TriggerType.HARD;
+                    scanner.triggerType = TriggerType.HARD;   // Hay que presionar el boton de escanear del dispositivo
                     break;
                 case 1: // Selected "SOFT"
-                    scanner.triggerType = TriggerType.SOFT_ALWAYS;
+                    scanner.triggerType = TriggerType.SOFT_ALWAYS;  // No hay que presionar ningun boton, escanea cualquier cosa que le ponen
                     break;
+                    // SOFT_ONCE es lo mismo que SOFT_ALWAYS pero solo una vez
             }
+        }*/
+
+        if(scanner != null){
+            scanner.triggerType = TriggerType.HARD;
         }
     }
 
@@ -544,7 +575,7 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
 
             } catch (ScannerException e) {
 
-                textViewStatus.setText("Status: " + e.getMessage());
+                textViewStatus.setText("Estado " + e.getMessage());
             }
         }
     }
@@ -564,21 +595,23 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
 					// Submit a new read.
 					scanner.read();
 
+					/*
 					if (checkBoxContinuous.isChecked())
 						bContinuousMode = true;
 					else
 						bContinuousMode = false;
+					*/
 
 					new AsyncUiControlUpdate().execute(false);
 				}
 				else
 				{
-					textViewStatus.setText("Status: Scanner is not enabled");
+					textViewStatus.setText("Estado: Escáner no disponible.");
 				}
 
             } catch (ScannerException e) {
 
-                textViewStatus.setText("Status: " + e.getMessage());
+                textViewStatus.setText("Estado: " + e.getMessage());
             }
         }
 
@@ -591,7 +624,8 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
             try {
 
                 // Reset continuous flag
-                bContinuousMode = false;
+                //bContinuousMode = false;
+                bContinuousMode = true;
 
                 // Cancel the pending read.
                 scanner.cancelRead();
@@ -600,7 +634,7 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
 
             } catch (ScannerException e) {
 
-                textViewStatus.setText("Status: " + e.getMessage());
+                textViewStatus.setText("Estado: " + e.getMessage());
             }
         }
     }
@@ -613,7 +647,8 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
                 scanner = barcodeManager.getDevice(deviceList.get(scannerIndex));
             }
             else {
-                textViewStatus.setText("Status: " + "Failed to get the specified scanner device! Please close and restart the application.");
+                // textViewStatus.setText("Estado: " + "Failed to get the specified scanner device! Please close and restart the application.");
+                textViewStatus.setText("Estado: " + "Fallo al obtener dispositivos de escáner soportados. Por favor, cierre y reinicie la aplicación.");
                 return;
             }
 
@@ -626,10 +661,11 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
                     scanner.enable();
                 } catch (ScannerException e) {
 
-                    textViewStatus.setText("Status: " + e.getMessage());
+                    textViewStatus.setText("Estado: " + e.getMessage());
                 }
             }else{
-                textViewStatus.setText("Status: " + "Failed to initialize the scanner device.");
+                //textViewStatus.setText("Status: " + "Failed to initialize the scanner device.");
+                textViewStatus.setText("Estado: " + "Fallo en la inicialización del dispositivo escáner.");
             }
         }
     }
@@ -645,7 +681,7 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
 			
 			} catch (Exception e) {
 
-                textViewStatus.setText("Status: " + e.getMessage());
+                textViewStatus.setText("Estado: " + e.getMessage());
             }
 			
 			try {
@@ -654,14 +690,14 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
 
             } catch (Exception e) {
 
-                textViewStatus.setText("Status: " + e.getMessage());
+                textViewStatus.setText("Estado: " + e.getMessage());
             }
 
             try{
                 scanner.release();
             } catch (Exception e) {
 
-                textViewStatus.setText("Status: " + e.getMessage());
+                textViewStatus.setText("Estado: " + e.getMessage());
             }
 
             scanner = null;
@@ -710,7 +746,7 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
         @Override
         protected void onPostExecute(String result) {
 
-            textViewStatus.setText("Status: " + result);
+            textViewStatus.setText("Estado: " + result);
         }
     }
 
@@ -724,8 +760,8 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
             checkBoxEAN13.setEnabled(bEnable);
             checkBoxCode39.setEnabled(bEnable);
             checkBoxCode128.setEnabled(bEnable);
-            spinnerScannerDevices.setEnabled(bEnable);
-            spinnerTriggers.setEnabled(bEnable);
+            //spinnerScannerDevices.setEnabled(bEnable);
+            //spinnerTriggers.setEnabled(bEnable);
         }
 
         @Override
@@ -760,7 +796,7 @@ public class MainActivity extends Activity implements EMDKListener, DataListener
                 case CONNECTED:
                     deInitScanner();
                     initScanner();
-                    setTrigger();
+                    setTrigger();   // setea hard o soft
                     setDecoders();
                     break;
                 case DISCONNECTED:
