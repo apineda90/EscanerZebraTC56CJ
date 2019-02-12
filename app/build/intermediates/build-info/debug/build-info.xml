@@ -6,7 +6,7 @@
     density="xhdpi"
     format="10"
     plugin-version="3.2.1"
-    timestamp="1549989466666"
+    timestamp="1549990435254"
     token="-8089182245043649304"
     verifier="COLD_SWAP_REQUESTED" >
 
@@ -70,7 +70,7 @@
     </build>
     <build
         build-mode="COLD"
-        timestamp="1549989466666"
+        timestamp="1549990435254"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="/home/gromero/Documentos/samples-emdkforandroid-6_9/BarcodeSample1/app/build/intermediates/instant-run-apk/debug/app-debug.apk"
